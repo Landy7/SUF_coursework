@@ -1,0 +1,92 @@
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".ui.main.findQuoteFragment" >
+<!--tools context?是什么？-->
+<!--  表格布局-->
+  <TableLayout
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:stretchColumns="1" >
+
+<!--这是一行 modify 去掉输入日期改成按钮和输入条-->
+  <TableRow>
+<!--  <TextView-->
+<!--    android:id="@+id/findQuotedateLabel"-->
+<!--    android:hint="date for findQuote"-->
+<!--    android:textStyle="bold"-->
+<!--    android:background="#EEFFBB"-->
+<!--    android:text="Date:" />-->
+<!--  <EditText-->
+<!--    android:id="@+id/findQuotedateField"-->
+<!--    android:layout_span="4" />-->
+    <Button
+        android:id="@+id/dateBtnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="start Date" />
+
+    <EditText
+        android:id="@+id/et1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cursorVisible="false"
+        android:editable="false" />
+
+  </TableRow>
+<!--    modify 改成了两行开始日期和结束日期-->
+    <TableRow>
+      <Button
+          android:id="@+id/dateBtnEnd"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="End Date" />
+      <EditText
+          android:id="@+id/et2"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:cursorVisible="false"
+          android:editable="false" />
+    </TableRow>
+
+<!-- 这是一行-->
+  <TableRow>
+  <Button
+  android:id="@+id/findQuoteOK"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:layout_column="1"
+  android:background="#AAAAFF"
+  android:text="findQuote"
+  android:onClick="findQuoteOK"
+  />
+  <Button
+  android:id="@+id/findQuoteCancel"
+  android:layout_width="wrap_content"
+  android:layout_height="wrap_content"
+  android:background="#FFAAAA"
+  android:layout_column="3"
+  android:text="Cancel"
+  android:onClick="findQuoteCancel"
+  />
+  </TableRow>
+
+<!--这是一行-->
+  <TableRow>
+  <TextView
+    android:id="@+id/findQuoteResultLabel"
+    android:hint="Result of findQuote"
+    android:textStyle="bold"
+    android:background="#EEFFBB"
+    android:text="Result:" />
+  <TextView
+    android:id="@+id/findQuoteResult"
+    android:hint="Result of findQuote"
+    android:textStyle="bold"
+    android:layout_span="4" />
+  </TableRow>
+</TableLayout>
+</ScrollView>
