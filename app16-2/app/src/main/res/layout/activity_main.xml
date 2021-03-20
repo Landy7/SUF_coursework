@@ -28,11 +28,17 @@ tools:context=".MainActivity">
         android:background="?attr/colorPrimary" />
 </com.google.android.material.appbar.AppBarLayout>
 
-<androidx.viewpager.widget.ViewPager
-    android:id="@+id/view_pager"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+<!--<androidx.viewpager.widget.ViewPager-->
+<!--    android:id="@+id/view_pager"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    app:layout_behavior="@string/appbar_scrolling_view_behavior" />-->
+<com.example.app16.IndexViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

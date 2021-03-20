@@ -64,15 +64,30 @@ tools:context=".ui.main.analyseFragment" >
 <!--    </HorizontalScrollView>-->
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="1000dp"
-        android:layout_height="500dp"
+        android:layout_width="2000dp"
+        android:layout_height="700dp"
         android:orientation="vertical">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
-            android:layout_width="1000dp"
-            android:layout_height="500dp"
+            android:layout_width="2000dp"
+            android:layout_height="700dp"
             android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <com.github.mikephil.charting.charts.LineChart
+            android:id="@+id/lineChart1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </LinearLayout>

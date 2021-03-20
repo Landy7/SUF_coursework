@@ -4,6 +4,7 @@ package com.example.app16.ui.main;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.app16.R;
@@ -45,6 +47,8 @@ public class analyseFragment extends Fragment implements OnClickListener {
     Button analysecancelButton;
     //加一个按钮
     Button changeButton;
+    LineChart hello;
+    LineChart mLineChart;
 
     public analyseFragment() {
     }
@@ -71,6 +75,10 @@ public class analyseFragment extends Fragment implements OnClickListener {
 //        scroll_view = root.findViewById(R.id.sc);
         //analyse之后的图像id
 //    analyseResult = (ImageView) root.findViewById(R.id.analyseResult);
+        //linechart--cancel
+        hello = root.findViewById(R.id.lineChart1);
+        //linechart--normal
+        mLineChart = root.findViewById(R.id.lineChart);
         //实例化获取instance
         analysebean = new analyseBean(myContext);
         //analyse按钮
@@ -111,6 +119,7 @@ public class analyseFragment extends Fragment implements OnClickListener {
     }
 
     public void analyseOK(View _v) {
+        hello.setVisibility(_v.INVISIBLE);
         System.out.println("enter the analyse");
         if (ModelFacade.dailyQuotes.isEmpty()) {
             Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
@@ -118,7 +127,9 @@ public class analyseFragment extends Fragment implements OnClickListener {
         }
         //多条线
         List<ILineDataSet> sets = new ArrayList<>();
-        LineChart mLineChart = (LineChart) root.findViewById(R.id.lineChart);
+        mLineChart.setVisibility(_v.VISIBLE);
+//        LineChart mLineChart = (LineChart) root.findViewById(R.id.lineChart);
+
         //显示边界
         mLineChart.setDrawBorders(true);
         // 触摸
@@ -142,6 +153,7 @@ public class analyseFragment extends Fragment implements OnClickListener {
         LineDataSet lineDataSet = new LineDataSet(entries, "share");
         sets.add(lineDataSet);
 //        LineData data = new LineData(lineDataSet);
+
         //test_entry
         List<Entry> entries_1 = new ArrayList<>();
         for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
@@ -150,9 +162,31 @@ public class analyseFragment extends Fragment implements OnClickListener {
         }
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet_1 = new LineDataSet(entries_1, "share");
-//        LineData data_1 = new LineData(lineDataSet_1);
         sets.add(lineDataSet_1);
+        //设置折线的颜色
+        lineDataSet_1.setColor(Color.YELLOW);
+        //圆点颜色
+        lineDataSet_1.setCircleColor(Color.BLACK);
+
+        //test_entry
+        List<Entry> entries_2 = new ArrayList<>();
+        for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
+            DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
+            entries_2.add(new Entry(i, (float) 1.40));
+        }
+        //一个LineDataSet就是一条线
+        LineDataSet lineDataSet_2 = new LineDataSet(entries_2, "share");
+        sets.add(lineDataSet_2);
+        //不显示折线
+        lineDataSet_2.setVisible(false);
+        //设置折线的颜色
+        lineDataSet_2.setColor(Color.YELLOW);
+        //圆点颜色
+        lineDataSet_2.setCircleColor(Color.BLACK);
+
         LineData lineData  = new LineData(sets);
+        //显示纵坐标
+        lineData.setDrawValues(true);
 
         XAxis xAxis = mLineChart.getXAxis();
 
@@ -225,6 +259,9 @@ public class analyseFragment extends Fragment implements OnClickListener {
     //这个功能有问题---modify
     public void analyseCancel(View _v) {
         ModelFacade.clearData();
+
+        mLineChart.setVisibility(_v.INVISIBLE);
+        hello.setVisibility(_v.VISIBLE);
 
     }
 }

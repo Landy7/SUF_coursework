@@ -24,9 +24,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //实例化对象获取context
         SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-        ViewPager viewPager = findViewById(R.id.view_pager);
+//        ViewPager viewPager = findViewById(R.id.view_pager);
+        IndexViewPager viewPager = findViewById(R.id.view_pager);
         //？
         viewPager.setAdapter(sectionsPagerAdapter);
+        //禁止左右滑动
+        viewPager.setScanScroll(false);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
         //获取实例

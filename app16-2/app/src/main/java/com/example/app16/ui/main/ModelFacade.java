@@ -65,9 +65,19 @@ public class ModelFacade implements InternetCallback
       //获取时间
       t1 = dateComponent.getEpochSeconds(Startdate);
       long t2 = dateComponent.getEpochSeconds(EndDate);
-      long t3 = t2 - t1;
-      long t4 = t1 + t3;
-      long t5 = t1 + 20 * 86400;
+      if(t2 - t1 > 63072000){
+        result = "over 2 years";
+      }
+      else if(t2 < t1){
+        result = "wrong date,please try again";
+      }
+      else if(t1 == -1 || t2 == -1){
+        result = "the date is null, try it again";
+      }
+      else{
+//      long t3 = t2 - t1;
+//      long t4 = t1 + t3;
+//      long t5 = t1 + 20 * 86400;
 //     t1加7天 86400 = 24 * 60 * 60
       String url = "";
 
@@ -84,7 +94,8 @@ public class ModelFacade implements InternetCallback
       result = ("Called url: " + url);
 
       //获得一串url
-      System.out.println(result);
+      System.out.println(result);}
+
       return result;
 
 //         }
