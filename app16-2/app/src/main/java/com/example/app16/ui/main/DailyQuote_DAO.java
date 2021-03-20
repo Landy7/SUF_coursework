@@ -72,15 +72,23 @@ public class DailyQuote_DAO {
     DailyQuote dailyquotex = new DailyQuote();
 //    { dailyquotex = DailyQuote.createByPKDailyQuote((String) _line1vals.get(0)); }
 
+    String date = _line1vals.get(0).equals("null") ? "0" : _line1vals.get(0);
+    String open = _line1vals.get(1).equals("null") ? "0" : _line1vals.get(1);
+    String high = _line1vals.get(2).equals("null") ? "0" : _line1vals.get(2);
+    String low = _line1vals.get(3).equals("null") ? "0" : _line1vals.get(3);
+    String close = _line1vals.get(4).equals("null") ? "0" : _line1vals.get(4);
+    String adjclose = _line1vals.get(5).equals("null") ? "0" : _line1vals.get(5);
+    String volume = _line1vals.get(6).equals("null") ? "0" : _line1vals.get(6);
+
     //index 0 是date
     System.out.println(_line1vals);
-    dailyquotex.date = (String) _line1vals.get(0);
-    dailyquotex.open = Double.parseDouble((String) _line1vals.get(1));
-    dailyquotex.high = Double.parseDouble((String) _line1vals.get(2));
-    dailyquotex.low = Double.parseDouble((String) _line1vals.get(3));
-    dailyquotex.close = Double.parseDouble((String) _line1vals.get(4));
-    dailyquotex.adjclose = Double.parseDouble((String) _line1vals.get(5));
-    dailyquotex.volume = Double.parseDouble((String) _line1vals.get(6));
+    dailyquotex.date = (String) date;
+    dailyquotex.open = Double.parseDouble((String) open);
+    dailyquotex.high = Double.parseDouble((String) high);
+    dailyquotex.low = Double.parseDouble((String) low);
+    dailyquotex.close = Double.parseDouble((String) close);
+    dailyquotex.adjclose = Double.parseDouble((String) adjclose);
+    dailyquotex.volume = Double.parseDouble((String) volume);
     return dailyquotex;
   }
 
