@@ -12,15 +12,8 @@ public class analyseBean
   private List errors = new ArrayList();
 
   //获取context
-  public analyseBean(Context _c) { model = ModelFacade.getInstance(_c); }
+  public analyseBean(Context _c) { ModelFacade.getInstance(_c); }
 
-  //modify---原本为空
-  public void resetData()
-  {
-    //数据设置为null
-    DailyQuote.DailyQuote_allInstances.clear();
-    DailyQuote.DailyQuote_index.clear();
-  }
 
   public boolean isanalyseerror()
   { errors.clear(); 
@@ -30,9 +23,9 @@ public class analyseBean
   public String errors() { return errors.toString(); }
 
   //图像分析---modify---Arraylist
-  public GraphDisplay analyse()
-  { //获取modelFacade的图像
-    return model.analyse(); }
+//  public GraphDisplay analyse()
+//  { //获取modelFacade的图像
+//    return model.analyse(); }
 
 //  //图像分析---modify---Arraylist
 //  public GraphDisplay analyse2()

@@ -26,14 +26,20 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
   public Fragment getItem(int position)
   { // instantiate a fragment for the page.
       //0表示findQuote
+      analyseFragment af_all = new analyseFragment();
     if (position == 0)
     {   //findquote
-        return findQuoteFragment.newInstance(mContext); }
+        //modify
+        findQuoteFragment fqf = new findQuoteFragment();
+        return fqf.newInstance(mContext); }
+
     //1表示Fragment
     else if (position == 1)
     {   //analyse
-        return analyseFragment.newInstance(mContext); }
-    return analyseFragment.newInstance(mContext); 
+        analyseFragment af = new analyseFragment();
+        return af.newInstance(mContext); }
+    //modify
+    return af_all.newInstance(mContext);
   }
 
   @Nullable

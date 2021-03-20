@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -31,5 +32,7 @@ public class MainActivity extends AppCompatActivity {
         //获取实例
         model = ModelFacade.getInstance(this);
 
+
     }
+
 }

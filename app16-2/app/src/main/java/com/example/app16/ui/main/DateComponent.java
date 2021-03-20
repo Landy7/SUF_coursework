@@ -10,8 +10,8 @@ import java.text.SimpleDateFormat;
 
 public class DateComponent
 {
-    //获取时间
-    public static long getEpochSeconds(String date)
+    //获取时间---modify
+    public long getEpochSeconds(String date)
   {
       DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 

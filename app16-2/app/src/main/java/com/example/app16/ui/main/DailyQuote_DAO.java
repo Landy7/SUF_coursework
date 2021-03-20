@@ -18,8 +18,8 @@ import org.json.JSONObject;
 import org.json.*;
 
 public class DailyQuote_DAO {
-  //获取URL
-  public static String getURL(String command, ArrayList<String> pars, ArrayList<String> values) {
+  //获取URL---modify
+  public String getURL(String command, ArrayList<String> pars, ArrayList<String> values) {
 
     String res = "https://query1.finance.yahoo.com/v7/finance/download/";
 
@@ -43,34 +43,37 @@ public class DailyQuote_DAO {
     return res;
   }
 
-  //id传入为date
-  public static boolean isCached(String id) {
-    //DailyQuote_index是静态的---获取key值为date
-    //看是否ID存在---就是date存在
-    DailyQuote _x = DailyQuote.DailyQuote_index.get(id);
-    if (_x == null) { return false; }
-    return true;
-  }
+  //id传入为date---modify
+//  public boolean isCached(String id) {
+//    //DailyQuote_index是静态的---获取key值为date
+//    //看是否ID存在---就是date存在
+//    DailyQuote _x = DailyQuote.DailyQuote_index.get(id);
+//    if (_x == null) { return false; }
+//    return true;
+//  }
 
 
 
-  public static DailyQuote getCachedInstance(String id)
-  { return DailyQuote.DailyQuote_index.get(id); }
+  //modify
+  public DailyQuote getCachedInstance(String id)
+  { DailyQuote dailyQuote = new DailyQuote();
+    return dailyQuote.DailyQuote_index.get(id); }
 
 
 
-  //????
+  //modify---把从网上获取的数据写入dailyQuote的各个属性
   public static DailyQuote parseCSV(String _line) {
 
     if (_line == null) { return null; }
     ArrayList<String> _line1vals = Ocl.tokeniseCSV(_line);
-    DailyQuote dailyquotex;
-    dailyquotex = DailyQuote.DailyQuote_index.get((String) _line1vals.get(0));
-
-    if (dailyquotex == null)
-    { dailyquotex = DailyQuote.createByPKDailyQuote((String) _line1vals.get(0)); }
+//    DailyQuote dailyquotex;
+//    dailyquotex = DailyQuote.DailyQuote_index.get((String) _line1vals.get(0));
+    //modify
+    DailyQuote dailyquotex = new DailyQuote();
+//    { dailyquotex = DailyQuote.createByPKDailyQuote((String) _line1vals.get(0)); }
 
     //index 0 是date
+    System.out.println(_line1vals);
     dailyquotex.date = (String) _line1vals.get(0);
     dailyquotex.open = Double.parseDouble((String) _line1vals.get(1));
     dailyquotex.high = Double.parseDouble((String) _line1vals.get(2));
@@ -82,15 +85,15 @@ public class DailyQuote_DAO {
   }
 
 
-//
+//modify
   public static DailyQuote parseJSON(JSONObject obj) {
 
     if (obj == null) { return null; }
     try {
       String date = obj.getString("date");
-      DailyQuote _dailyquotex = DailyQuote.DailyQuote_index.get(date);
-      if (_dailyquotex == null) { _dailyquotex = DailyQuote.createByPKDailyQuote(date); }
-      
+//      DailyQuote _dailyquotex = DailyQuote.DailyQuote_index.get(date);
+//      if (_dailyquotex == null) { _dailyquotex = DailyQuote.createByPKDailyQuote(date); }
+      DailyQuote _dailyquotex = new DailyQuote();
       _dailyquotex.date = obj.getString("date");
       _dailyquotex.open = obj.getDouble("open");
       _dailyquotex.high = obj.getDouble("high");
@@ -116,14 +119,17 @@ public class DailyQuote_DAO {
     for (int i = 1; i < rows.size(); i++) {
 
       String row = rows.get(i);
-      if (row == null || row.trim().length() == 0)
-      { }
+      if (row == null || row.trim().length() == 0 || Ocl.tokeniseCSV(row).get(1).equals("null"))
+      {
+
+      }
       else
       { DailyQuote _x = parseCSV(row);
         if (_x != null)
         { result.add(_x); }
       }
     }
+    //每一次获取的DailyQuote,都添加到了ArrayList
     return result;
   }
 

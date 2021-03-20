@@ -8,19 +8,25 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+
 import android.content.Context;
 
 public class InternetAccessor extends AsyncTask<String, Void, String>
 {  private InternetCallback delegate = null;
-   private static InternetAccessor instance = null;
+//modify
+   private InternetAccessor instance = null;
 
    public void setDelegate(InternetCallback c)
    { delegate = c; }
 
+   //modify
    public static InternetAccessor getInstance()
-   { if (instance == null) 
-     { instance = new InternetAccessor(); }
-     return instance; }
+   {
+       InternetAccessor internetAccessor = new InternetAccessor();
+       if (internetAccessor.instance == null)
+     { internetAccessor.instance = new InternetAccessor(); }
+     return internetAccessor.instance; }
 
    @Override
    protected void onPreExecute() {}
@@ -32,6 +38,7 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
      try { myData = fetchUrl(url); }
      catch (Exception _e)
      { delegate.internetAccessCompleted(null);
+         System.out.println("hello_randy1");
        return null;
      }
      //获取到数据
@@ -60,6 +67,7 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
 
       } catch (IOException e) {
           delegate.internetAccessCompleted(null);
+         System.out.println("hello_randy2");
           return null;
       }
 
@@ -70,14 +78,15 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
   @Override
   protected void onPostExecute(String result) {
       delegate.internetAccessCompleted(result);
+      System.out.println("hello_randy3");
   }
 
   @Override
   protected void onProgressUpdate(Void... values) {}
  }
 
- //？？
+ //modify 接口---异步处理成功后进入makeFromCSV导入数据
 interface InternetCallback
-{ public void internetAccessCompleted(String response); }
+{ public ArrayList<DailyQuote> internetAccessCompleted(String response); }
 
 

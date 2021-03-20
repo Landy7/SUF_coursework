@@ -54,7 +54,8 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
 
  public findQuoteFragment() {}
 
-  public static findQuoteFragment newInstance(Context c) {
+ //modify---去掉饿了static
+  public findQuoteFragment newInstance(Context c) {
 
       findQuoteFragment fragment = new findQuoteFragment();
       Bundle args = new Bundle();
@@ -158,10 +159,11 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
 
   public void findQuoteOK(View _v) 
   {
-      if(DailyQuote.DailyQuote_allInstances != null && DailyQuote.DailyQuote_index != null){
-          DailyQuote.DailyQuote_allInstances.clear();
-          DailyQuote.DailyQuote_index.clear();
-      }
+//      DailyQuote findQuote = new DailyQuote();
+//      if(DailyQuote.DailyQuote_allInstances != null && DailyQuote.DailyQuote_index != null){
+//          DailyQuote.DailyQuote_allInstances.clear();
+//          DailyQuote.DailyQuote_index.clear();
+//      }
       //获取开始时间--modify
     findQuotedateDataStart = et1.getText() + "";
 
@@ -180,6 +182,7 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
     }
     else
     {   //Result显示在app上
+        //发送信息给网上进行获取数据操作
         findQuoteResult.setText(findquotebean.findQuote() + ""); }
   }
 

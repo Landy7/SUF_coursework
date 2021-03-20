@@ -7,12 +7,14 @@ import java.util.List;
 import android.content.Context;
 
 public class findQuoteBean
-{ ModelFacade model = null;
+{
+  public ModelFacade model;
 
   private String Startdate = "";
   private String Enddate = "";
   private List errors = new ArrayList();
 
+  //modify---获取页面的数据
   public findQuoteBean(Context _c) {
     model = ModelFacade.getInstance(_c);
   }
