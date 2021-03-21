@@ -217,6 +217,9 @@ public class analyseFragment extends Fragment implements OnClickListener {
             }
             //一个LineDataSet就是一条线
             LineDataSet lineDataSet = new LineDataSet(entries, "share");
+            lineDataSet.setColor(Color.BLUE);
+//            //圆点颜色
+            lineDataSet.setCircleColor(Color.BLUE);
             sets.add(lineDataSet);
 //        LineData data = new LineData(lineDataSet);
 
@@ -266,6 +269,9 @@ public class analyseFragment extends Fragment implements OnClickListener {
                 }
                 //一个LineDataSet就是一条线
                 LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
+                lineDataSet_1.setColor(Color.YELLOW);
+//            //圆点颜色
+                lineDataSet_1.setCircleColor(Color.YELLOW);
                 sets.add(lineDataSet_1);
             }
 //        LineData data_1 = new LineData(lineDataSet_1);
