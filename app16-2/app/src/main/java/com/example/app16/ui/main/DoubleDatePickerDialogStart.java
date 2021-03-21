@@ -113,13 +113,8 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
         mCallBackStart = callBack;
 
         Context themeContext = getContext();
-<<<<<<< HEAD
-        setButton(BUTTON_POSITIVE, "CONFIRM", this);
-        setButton(BUTTON_NEGATIVE, "CANCEL", this);
-=======
         setButton(BUTTON_POSITIVE, "Confirm", this);
         setButton(BUTTON_NEGATIVE, "Cancel", this);
->>>>>>> 3fd73799801dc245feb2e099ea9248e0dd5d305c
         // setButton(BUTTON_POSITIVE,
         // themeContext.getText(android.R.string.date_time_done), this);
         setIcon(0);
