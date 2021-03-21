@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.util.Log;
 
 public class InternetAccessor extends AsyncTask<String, Void, String>
 {  private InternetCallback delegate = null;
@@ -64,7 +65,6 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
           while ((urlContent = myBuffRdr.readLine()) != null) {
               myStrBuff.append(urlContent + '\n');
           }
-
       } catch (IOException e) {
           delegate.internetAccessCompleted(null);
          System.out.println("hello_randy2");

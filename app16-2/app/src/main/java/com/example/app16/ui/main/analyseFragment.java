@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -108,7 +109,11 @@ public class analyseFragment extends Fragment implements OnClickListener {
         } catch (Exception _e) {
         }
         if (_v.getId() == R.id.analyseOK) {
-            analyseOK(_v);
+            try {
+                analyseOK(_v, "");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else if (_v.getId() == R.id.analyseCancel) {
             analyseCancel(_v);
         }
@@ -118,10 +123,9 @@ public class analyseFragment extends Fragment implements OnClickListener {
         }
     }
 
-    public void analyseOK(View _v) {
-        hello.setVisibility(_v.INVISIBLE);
+    public void analyseOK(View _v, String selected) throws Exception {
         System.out.println("enter the analyse");
-        if (ModelFacade.dailyQuotes.isEmpty()) {
+        if (ModelFacade.dailyQuotes == null || ModelFacade.dailyQuotes.isEmpty()) {
             Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -146,44 +150,66 @@ public class analyseFragment extends Fragment implements OnClickListener {
         List<String> xList = new ArrayList<>();
         for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
             DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
+            DateComponent dateComponent = new DateComponent();
             entries.add(new Entry(i, (float) dailyQuote.getClose()));
-            xList.add(dailyQuote.getDate());
+            if (dateComponent.getEpochSeconds(dailyQuote.date) >= dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
+                xList.add(dailyQuote.getDate());
+            }
         }
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet = new LineDataSet(entries, "share");
         sets.add(lineDataSet);
 //        LineData data = new LineData(lineDataSet);
 
-        //test_entry
-        List<Entry> entries_1 = new ArrayList<>();
-        for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
-            DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
-            entries_1.add(new Entry(i, (float) 1.20));
-        }
-        //一个LineDataSet就是一条线
-        LineDataSet lineDataSet_1 = new LineDataSet(entries_1, "share");
-        sets.add(lineDataSet_1);
-        //设置折线的颜色
-        lineDataSet_1.setColor(Color.YELLOW);
-        //圆点颜色
-        lineDataSet_1.setCircleColor(Color.BLACK);
+        // 根据公式生成的线
+        // 判断是否选了公式，selected代表公式名
+        if (selected.length() > 0) {
+            List<Entry> entries_1 = new ArrayList<>();
+            // 所选日期之前多获取的数据
+            List<Double> preQuotes = new ArrayList<>();
+            // 所选日期区间内的数据
+            List<Double> postQuotes = new ArrayList<>();
+            for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
+                DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
+                DateComponent dateComponent = new DateComponent();
+                if (dateComponent.getEpochSeconds(dailyQuote.date) < dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
+                    preQuotes.add(dailyQuote.close);
+                } else {
+                    postQuotes.add(dailyQuote.close);
+                }
+            }
+            List<Double> prices = preQuotes.subList(preQuotes.size() - 25, preQuotes.size());
+            prices.addAll(postQuotes);
+            double[] priceArray = new double[prices.size()];
+            for(int i = 0; i < prices.size(); i++) {
+                priceArray[0] = prices.get(i);
+            }
+            double[] results = new double[prices.size()];
 
-        //test_entry
-        List<Entry> entries_2 = new ArrayList<>();
-        for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
-            DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
-            entries_2.add(new Entry(i, (float) 1.40));
-        }
-        //一个LineDataSet就是一条线
-        LineDataSet lineDataSet_2 = new LineDataSet(entries_2, "share");
-        sets.add(lineDataSet_2);
-        //不显示折线
-        lineDataSet_2.setVisible(false);
-        //设置折线的颜色
-        lineDataSet_2.setColor(Color.YELLOW);
-        //圆点颜色
-        lineDataSet_2.setCircleColor(Color.BLACK);
+            // 根据选中项调用不同的公式
+            if (selected == "SMA") {
+                results = new SimpleMovingAverage().calculate(priceArray, 25).getSMA();
+            } else if (selected == "EMA") {
+                results = new ExponentialMovingAverage().calculate(priceArray, 25).getEMA();
+            } else if (selected == "MACD") {
+                results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
+            }
 
+            for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
+                DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
+                DateComponent dateComponent = new DateComponent();
+                if (dateComponent.getEpochSeconds(dailyQuote.date) < dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
+                    entries_1.add(new Entry(i, (float) 0));
+                } else {
+                    int resultIndex = i - (ModelFacade.dailyQuotes.size() - results.length);
+                    entries_1.add(new Entry(i, (float) results[resultIndex]));
+                }
+            }
+            //一个LineDataSet就是一条线
+            LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
+            sets.add(lineDataSet_1);
+        }
+//        LineData data_1 = new LineData(lineDataSet_1);
         LineData lineData  = new LineData(sets);
         //显示纵坐标
         lineData.setDrawValues(true);
@@ -248,7 +274,12 @@ public class analyseFragment extends Fragment implements OnClickListener {
         builder.setItems(indicator, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(getActivity(), "Choice is：" + indicator[which], Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getActivity(), "Choice is：" + indicator[which], Toast.LENGTH_SHORT).show();
+                try {
+                    analyseOK(_v, indicator[which]);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         builder.show();

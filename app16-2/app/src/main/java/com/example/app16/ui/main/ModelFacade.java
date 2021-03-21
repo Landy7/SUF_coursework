@@ -1,6 +1,8 @@
 package com.example.app16.ui.main;
 
 import android.content.Context;
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +19,8 @@ public class ModelFacade implements InternetCallback
   public static ModelFacade instance = null;
 
   public static ArrayList<DailyQuote> dailyQuotes;
+
+  public static String originalStartDate;
 
   //modify(不是static)
   public static ModelFacade getInstance(Context context)
@@ -63,7 +67,8 @@ public class ModelFacade implements InternetCallback
 //    else {
       long t1 = 0;
       //获取时间
-      t1 = dateComponent.getEpochSeconds(Startdate);
+      originalStartDate = Startdate;
+      t1 = dateComponent.getEpochSeconds(Startdate) - 40 * 24 * 60 * 60;
       long t2 = dateComponent.getEpochSeconds(EndDate);
       if(t2 - t1 > 63072000){
         result = "over 2 years";
