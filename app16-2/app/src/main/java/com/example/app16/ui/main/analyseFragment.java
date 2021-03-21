@@ -255,6 +255,8 @@ public class analyseFragment extends Fragment implements OnClickListener {
                     results = new ExponentialMovingAverage().calculate(priceArray, 25).getEMA();
                 } else if (selected == "MACD") {
                     results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
+                }else if (selected == "MACDAVG"){
+                    results = new MACDAVG().calculate(priceArray, 8, 11,25).getMACDAVG();
                 }
 
                 for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
