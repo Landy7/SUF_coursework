@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import org.json.*;
 
 public class DailyQuote_DAO {
+  public static ArrayList<String> content;
   //获取URL---modify
   public String getURL(String command, ArrayList<String> pars, ArrayList<String> values) {
 
@@ -82,6 +83,7 @@ public class DailyQuote_DAO {
 
     //index 0 是date
     System.out.println(_line1vals);
+    //下载数据
     dailyquotex.date = (String) date;
     dailyquotex.open = Double.parseDouble((String) open);
     dailyquotex.high = Double.parseDouble((String) high);
@@ -137,6 +139,7 @@ public class DailyQuote_DAO {
         { result.add(_x); }
       }
     }
+    content = rows;
     //每一次获取的DailyQuote,都添加到了ArrayList
     return result;
   }

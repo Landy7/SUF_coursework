@@ -113,14 +113,14 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
         mCallBackStart = callBack;
 
         Context themeContext = getContext();
-        setButton(BUTTON_POSITIVE, "Confirm", this);
-        setButton(BUTTON_NEGATIVE, "Cancel", this);
+        setButton(BUTTON_POSITIVE, "CONFIRM", this);
+        setButton(BUTTON_NEGATIVE, "CANCEL", this);
         // setButton(BUTTON_POSITIVE,
         // themeContext.getText(android.R.string.date_time_done), this);
         setIcon(0);
 
         LayoutInflater inflater = (LayoutInflater) themeContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.date_picker_dialog, null);
+        View view = inflater.inflate(R.layout.date_start, null);
         setView(view);
         //获取开始和结束时间
         mDatePicker_start = (DatePicker) view.findViewById(R.id.datePickerStart);

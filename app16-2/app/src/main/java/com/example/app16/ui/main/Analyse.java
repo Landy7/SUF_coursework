@@ -18,11 +18,6 @@ class Analyse { static ArrayList<Analyse> Analyse_allInstances = new ArrayList<A
     return result; }
 
 
-  public GraphDisplay analyse()
-  {
-    GraphDisplay result = null;
-    return result;
-  }
 
 }
 

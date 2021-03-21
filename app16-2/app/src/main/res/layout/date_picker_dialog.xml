@@ -7,7 +7,7 @@
     android:padding="10dp" >
 
 
-    <LinearLayout
+    <RelativeLayout
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:gravity="center_horizontal"
@@ -21,17 +21,17 @@
         <DatePicker
             android:id="@+id/datePickerStart"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="533dp"
             android:calendarViewShown="false" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 <!--    <ImageView-->
 <!--           android:layout_width="wrap_content"-->
 <!--           android:layout_height="wrap_content"-->
 <!--           android:src="@drawable/fenge" />-->
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -43,11 +43,11 @@
            android:text="End Date" />
 
         <DatePicker
-           android:id="@+id/datePickerEnd"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:calendarViewShown="false" />
+            android:id="@+id/datePickerEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="533dp"
+            android:calendarViewShown="false" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

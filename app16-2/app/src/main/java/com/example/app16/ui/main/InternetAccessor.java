@@ -74,7 +74,7 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
       return myStrBuff.toString();
   }
 
-  //？？
+  //最后结果
   @Override
   protected void onPostExecute(String result) {
       delegate.internetAccessCompleted(result);

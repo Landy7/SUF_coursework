@@ -18,7 +18,7 @@ public class ModelFacade implements InternetCallback
 //  static ModelFacade instance = null;
   public static ModelFacade instance = null;
 
-  public static ArrayList<DailyQuote> dailyQuotes;
+  public static ArrayList<DailyQuote> dailyQuotes = new ArrayList<DailyQuote>();
 
   public static String originalStartDate;
 

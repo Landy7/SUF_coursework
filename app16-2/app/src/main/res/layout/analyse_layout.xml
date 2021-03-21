@@ -30,9 +30,19 @@ tools:context=".ui.main.analyseFragment" >
         android:layout_height="wrap_content"
         android:layout_column="2"
         android:background="#CDDC39"
-        android:text=" indicators"
+        android:text="indicators"
         android:onClick="change"
         />
+
+   <Button
+          android:id="@+id/download"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:background="#46A3FF"
+          android:layout_column="3"
+          android:text="download"
+          android:onClick="download"
+          />
   <Button
   android:id="@+id/analyseCancel"
   android:layout_width="wrap_content"
@@ -64,13 +74,13 @@ tools:context=".ui.main.analyseFragment" >
 <!--    </HorizontalScrollView>-->
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="2000dp"
+        android:layout_width="match_parent"
         android:layout_height="700dp"
         android:orientation="vertical">
 
         <com.github.mikephil.charting.charts.LineChart
             android:id="@+id/lineChart"
-            android:layout_width="2000dp"
+            android:layout_width="match_parent"
             android:layout_height="700dp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
@@ -92,3 +102,5 @@ tools:context=".ui.main.analyseFragment" >
 
 </LinearLayout>
 </ScrollView>
+
+
