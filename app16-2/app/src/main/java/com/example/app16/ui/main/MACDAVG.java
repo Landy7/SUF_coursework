@@ -15,7 +15,7 @@ public class MACDAVG
         macd.calculate(prices, fastPeriod,slowPeriod);
 
         for (int i = period - 1; i < prices.length; i++) {
-            this.macdavg[i] = NumberFormatter.round((ema.getEMA()macd.getMACD())[i]);
+            // this.macdavg[i] = NumberFormatter.round((ema.getEMA()macd.getMACD())[i]);
         }
 
         return this;

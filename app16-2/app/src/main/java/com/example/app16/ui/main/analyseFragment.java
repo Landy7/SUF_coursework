@@ -252,7 +252,6 @@ public class analyseFragment extends Fragment implements OnClickListener {
             LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
             sets.add(lineDataSet_1);
         }
->>>>>>> fix: lines
 //        LineData data_1 = new LineData(lineDataSet_1);
             LineData lineData = new LineData(sets);
             //显示纵坐标
