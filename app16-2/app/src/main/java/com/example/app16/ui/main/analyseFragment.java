@@ -30,6 +30,7 @@ import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -178,104 +179,80 @@ public class analyseFragment extends Fragment implements OnClickListener {
         dialog.show();
 
     }
-//<<<<<<<Updated upstream
+
 
     public void analyseOK(View _v, String selected) throws Exception {
-//=======
-            //cancel的那个layout不显示
-            hello.setVisibility(_v.INVISIBLE);
-            System.out.println("enter the analyse");
-            if (ModelFacade.dailyQuotes == null || ModelFacade.dailyQuotes.isEmpty()) {
-                Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
-                showDialog2();
-                return;
+        System.out.println("enter the analyse");
+        if (ModelFacade.dailyQuotes == null || ModelFacade.dailyQuotes.isEmpty()) {
+            Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //多条线
+        List<ILineDataSet> sets = new ArrayList<>();
+        mLineChart.setVisibility(_v.VISIBLE);
+//        LineChart mLineChart = (LineChart) root.findViewById(R.id.lineChart);
+
+        //显示边界
+        mLineChart.setDrawBorders(true);
+        // 触摸
+        mLineChart.setTouchEnabled(true);
+        // 拖拽
+        mLineChart.setDragEnabled(true);
+        // 缩放
+        mLineChart.setScaleEnabled(true);
+        Matrix m = new Matrix();
+        m.postScale(1.5f, 1f);//两个参数分别是x,y轴的缩放比例。例如：将x轴的数据放大为之前的1.5倍
+        mLineChart.getViewPortHandler().refresh(m, mLineChart, false);//将图表动画显示之前进行缩放
+        //设置数据---normal
+        List<Entry> entries = new ArrayList<>();
+        List<String> xList = new ArrayList<>();
+        // 所选日期之前多获取的数据
+        List<Double> preQuotes = new ArrayList<>();
+        // 所选日期区间内的数据
+        List<Double> postQuotes = new ArrayList<>();
+        for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
+            DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
+            DateComponent dateComponent = new DateComponent();
+            if (dateComponent.getEpochSeconds(dailyQuote.date) < dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
+                preQuotes.add(dailyQuote.close);
+            } else {
+                postQuotes.add(dailyQuote.close);
+                xList.add(dailyQuote.getDate());
             }
-             //多条线
-             List<ILineDataSet> sets = new ArrayList<>();
-            mLineChart.setVisibility(_v.VISIBLE);
-            //显示边界
-            mLineChart.setDrawBorders(true);
-            // 触摸
-            mLineChart.setTouchEnabled(true);
-            // 拖拽
-            mLineChart.setDragEnabled(true);
-            // 缩放
-            mLineChart.setScaleEnabled(true);
-            Matrix m = new Matrix();
-            m.postScale(1.5f, 1f);//两个参数分别是x,y轴的缩放比例。例如：将x轴的数据放大为之前的1.5倍
-            mLineChart.getViewPortHandler().refresh(m, mLineChart, false);//将图表动画显示之前进行缩放
-            //设置数据---normal
-            List<Entry> entries = new ArrayList<>();
-            List<String> xList = new ArrayList<>();
-            for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
-                DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
-                DateComponent dateComponent = new DateComponent();
-                entries.add(new Entry(i, (float) dailyQuote.getClose()));
-                if (dateComponent.getEpochSeconds(dailyQuote.date) >= dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
-                    xList.add(dailyQuote.getDate());
-                }
-            }
-            //一个LineDataSet就是一条线
-            LineDataSet lineDataSet = new LineDataSet(entries, "share");
-            lineDataSet.setColor(Color.BLUE);
-//            //圆点颜色
-            lineDataSet.setCircleColor(Color.BLUE);
-            sets.add(lineDataSet);
+        }
 //        LineData data = new LineData(lineDataSet);
 
-            // 根据公式生成的线
-            // 判断是否选了公式，selected代表公式名
-            if (selected.length() > 0) {
-                List<Entry> entries_1 = new ArrayList<>();
-                // 所选日期之前多获取的数据
-                List<Double> preQuotes = new ArrayList<>();
-                // 所选日期区间内的数据
-                List<Double> postQuotes = new ArrayList<>();
-                for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
-                    DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
-                    DateComponent dateComponent = new DateComponent();
-                    if (dateComponent.getEpochSeconds(dailyQuote.date) < dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
-                        preQuotes.add(dailyQuote.close);
-                    } else {
-                        postQuotes.add(dailyQuote.close);
-                    }
-                }
-                List<Double> prices = preQuotes.subList(preQuotes.size() - 25, preQuotes.size());
-                prices.addAll(postQuotes);
-                double[] priceArray = new double[prices.size()];
-                for (int i = 0; i < prices.size(); i++) {
-                    priceArray[0] = prices.get(i);
-                }
-                double[] results = new double[prices.size()];
+        List<Entry> entries_1 = new ArrayList<>();
+        List<Double> prices = preQuotes.subList(preQuotes.size() - 25, preQuotes.size());
+        prices.addAll(postQuotes);
+        double[] priceArray = new double[prices.size()];
+        for(int i = 0; i < prices.size(); i++) {
+            priceArray[i] = prices.get(i);
+        }
+        double[] results = new double[prices.size()];
 
-                // 根据选中项调用不同的公式
-                if (selected == "SMA") {
-                    results = new SimpleMovingAverage().calculate(priceArray, 25).getSMA();
-                } else if (selected == "EMA") {
-                    results = new ExponentialMovingAverage().calculate(priceArray, 25).getEMA();
-                } else if (selected == "MACD") {
-                    results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
-                }else if (selected == "MACDAVG"){
-                    results = new MACDAVG().calculate(priceArray, 8, 11,25).getMACDAVG();
-                }
+        // 根据选中项调用不同的公式
+        if (selected == "SMA") {
+            results = new SimpleMovingAverage().calculate(priceArray, 25).getSMA();
+        } else if (selected == "EMA") {
+            results = new ExponentialMovingAverage().calculate(priceArray, 25).getEMA();
+        } else if (selected == "MACD") {
+            results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
+        }
 
-                for (int i = 0; i < ModelFacade.dailyQuotes.size(); i++) {
-                    DailyQuote dailyQuote = ModelFacade.dailyQuotes.get(i);
-                    DateComponent dateComponent = new DateComponent();
-                    if (dateComponent.getEpochSeconds(dailyQuote.date) < dateComponent.getEpochSeconds(ModelFacade.originalStartDate)) {
-                        entries_1.add(new Entry(i, (float) 0));
-                    } else {
-                        int resultIndex = i - (ModelFacade.dailyQuotes.size() - results.length);
-                        entries_1.add(new Entry(i, (float) results[resultIndex]));
-                    }
-                }
-                //一个LineDataSet就是一条线
-                LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
-                lineDataSet_1.setColor(Color.YELLOW);
-//            //圆点颜色
-                lineDataSet_1.setCircleColor(Color.YELLOW);
-                sets.add(lineDataSet_1);
-            }
+        for (int i = 0; i < postQuotes.size(); i++) {
+            entries.add(new Entry(i, (float) priceArray[25 + i]));
+            entries_1.add(new Entry(i, (float) results[25 + i]));
+        }
+        //一个LineDataSet就是一条线
+        LineDataSet lineDataSet = new LineDataSet(entries, "share");
+        sets.add(lineDataSet);
+        //一个LineDataSet就是一条线
+        if (selected.length() > 0) {
+            LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
+            sets.add(lineDataSet_1);
+        }
+>>>>>>> fix: lines
 //        LineData data_1 = new LineData(lineDataSet_1);
             LineData lineData = new LineData(sets);
             //显示纵坐标

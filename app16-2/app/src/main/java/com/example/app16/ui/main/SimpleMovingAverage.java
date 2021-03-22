@@ -13,7 +13,7 @@ public class SimpleMovingAverage {
 		this.results = new double[prices.length];
 
 		for (int i = 0; i < prices.length - period; i++) {
-			this.results[i] = NumberFormatter
+			this.results[(period + i - 1)] = NumberFormatter
 					.round((Arrays.stream(Arrays.copyOfRange(prices, i, (i + period))).sum()) / period);
 		}
 

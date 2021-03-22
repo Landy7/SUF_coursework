@@ -92,6 +92,7 @@ public class ModelFacade implements InternetCallback
       sq2 = Ocl.copySequence(Ocl.initialiseSequence((t1 + ""),(t2 + ""),"1d","history"));
       //获取url
       url = dailyQuote_dao.getURL("GBPUSD=X", sq1, sq2);
+        // url = "http://10.0.2.2:8080/data.csv";
       InternetAccessor x = null;
       x = new InternetAccessor();
       x.setDelegate(this);
