@@ -238,6 +238,8 @@ public class analyseFragment extends Fragment implements OnClickListener {
             results = new ExponentialMovingAverage().calculate(priceArray, 25).getEMA();
         } else if (selected == "MACD") {
             results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
+        } else if (selected == "MACDAVG") {
+            results = new MACDAVG().calculate(priceArray,9,11, 25).getMACDAVG();
         }
 
         for (int i = 0; i < postQuotes.size(); i++) {
@@ -246,10 +248,16 @@ public class analyseFragment extends Fragment implements OnClickListener {
         }
         //一个LineDataSet就是一条线
         LineDataSet lineDataSet = new LineDataSet(entries, "share");
+        lineDataSet.setColor(Color.BLUE);
+//            //圆点颜色
+        lineDataSet.setCircleColor(Color.BLUE);
         sets.add(lineDataSet);
         //一个LineDataSet就是一条线
         if (selected.length() > 0) {
             LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
+            lineDataSet_1.setColor(Color.YELLOW);
+//            //圆点颜色
+            lineDataSet_1.setCircleColor(Color.YELLOW);
             sets.add(lineDataSet_1);
         }
 //        LineData data_1 = new LineData(lineDataSet_1);

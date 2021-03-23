@@ -8,14 +8,16 @@ public class MACDAVG
 
         this.macdavg = new double[prices.length];
 
-        ExponentialMovingAverage ema= new ExponentialMovingAverage();
-        ema.calculate(prices, period);
-
         MovingAverageConvergenceDivergence macd = new MovingAverageConvergenceDivergence();
         macd.calculate(prices, fastPeriod,slowPeriod);
 
+        ExponentialMovingAverage ema= new ExponentialMovingAverage();
+        ema.calculate(macd.getMACD(), period);
+
+
+
         for (int i = period - 1; i < prices.length; i++) {
-            // this.macdavg[i] = NumberFormatter.round((ema.getEMA()macd.getMACD())[i]);
+            this.macdavg[i] = NumberFormatter.round(ema.getEMA()[i]);
         }
 
         return this;
