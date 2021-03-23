@@ -185,11 +185,14 @@ public class analyseFragment extends Fragment implements OnClickListener {
         System.out.println("enter the analyse");
         if (ModelFacade.dailyQuotes == null || ModelFacade.dailyQuotes.isEmpty()) {
             Toast.makeText(getActivity(), "暂无数据", Toast.LENGTH_SHORT).show();
+            showDialog2();
             return;
         }
         //多条线
         List<ILineDataSet> sets = new ArrayList<>();
         mLineChart.setVisibility(_v.VISIBLE);
+        //layout不显示
+        hello.setVisibility(_v.INVISIBLE);
 //        LineChart mLineChart = (LineChart) root.findViewById(R.id.lineChart);
 
         //显示边界
@@ -259,6 +262,8 @@ public class analyseFragment extends Fragment implements OnClickListener {
 //            //圆点颜色
             lineDataSet_1.setCircleColor(Color.YELLOW);
             sets.add(lineDataSet_1);
+            lineDataSet_1.setCircleColor(Color.BLACK);
+            lineDataSet_1.setColor(Color.YELLOW);
         }
 //        LineData data_1 = new LineData(lineDataSet_1);
             LineData lineData = new LineData(sets);
