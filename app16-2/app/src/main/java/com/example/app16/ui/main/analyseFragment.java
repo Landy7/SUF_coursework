@@ -236,11 +236,11 @@ public class analyseFragment extends Fragment implements OnClickListener {
 
         // 根据选中项调用不同的公式
         if (selected == "SMA") {
-            results = new SimpleMovingAverage().calculate(priceArray, 25).getSMA();
+            results = new SMA().calculate(priceArray, 25).getSMA();
         } else if (selected == "EMA") {
-            results = new ExponentialMovingAverage().calculate(priceArray, 25).getEMA();
+            results = new EMA().calculate(priceArray, 25).getEMA();
         } else if (selected == "MACD") {
-            results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
+            results = new MACD().calculate(priceArray, 11, 25).getMACD();
         } else if (selected == "MACDAVG") {
             results = new MACDAVG().calculate(priceArray,9,11, 25).getMACDAVG();
         }

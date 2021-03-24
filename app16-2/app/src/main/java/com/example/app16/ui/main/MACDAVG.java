@@ -8,10 +8,10 @@ public class MACDAVG
 
         this.macdavg = new double[prices.length];
 
-        MovingAverageConvergenceDivergence macd = new MovingAverageConvergenceDivergence();
+        MACD macd = new MACD();
         macd.calculate(prices, fastPeriod,slowPeriod);
 
-        ExponentialMovingAverage ema= new ExponentialMovingAverage();
+        EMA ema= new EMA();
         ema.calculate(macd.getMACD(), period);
 
 
