@@ -19,7 +19,7 @@ import org.json.*;
 
 public class DailyQuote_DAO {
   public static ArrayList<String> content;
-  //获取URL---modify
+  //get URL
   public String getURL(String command, ArrayList<String> pars, ArrayList<String> values) {
 
     String res = "https://query1.finance.yahoo.com/v7/finance/download/";
@@ -34,7 +34,7 @@ public class DailyQuote_DAO {
     res = res + "?";
 
     for (int i = 0; i < pars.size(); i++) {
-      //par与value一一定义, period=t1&period=t2&.....
+      //par and value, period=t1&period=t2&.....
       String par = pars.get(i);
       String val = values.get(i); 
       res = res + par + "=" + val;
@@ -44,25 +44,18 @@ public class DailyQuote_DAO {
     return res;
   }
 
-  //id传入为date---modify
-//  public boolean isCached(String id) {
-//    //DailyQuote_index是静态的---获取key值为date
-//    //看是否ID存在---就是date存在
-//    DailyQuote _x = DailyQuote.DailyQuote_index.get(id);
-//    if (_x == null) { return false; }
-//    return true;
-//  }
 
 
 
-  //modify
+
+
   public DailyQuote getCachedInstance(String id)
   { DailyQuote dailyQuote = new DailyQuote();
     return dailyQuote.DailyQuote_index.get(id); }
 
 
 
-  //modify---把从网上获取的数据写入dailyQuote的各个属性
+  //get the data from website write into each attributes of dailyQuote
   public static DailyQuote parseCSV(String _line) {
 
     if (_line == null) { return null; }
@@ -81,9 +74,9 @@ public class DailyQuote_DAO {
     String adjclose = _line1vals.get(5).equals("null") ? "0" : _line1vals.get(5);
     String volume = _line1vals.get(6).equals("null") ? "0" : _line1vals.get(6);
 
-    //index 0 是date
+    //index 0 is date
     System.out.println(_line1vals);
-    //下载数据
+    //stored the data
     dailyquotex.date = (String) date;
     dailyquotex.open = Double.parseDouble((String) open);
     dailyquotex.high = Double.parseDouble((String) high);
@@ -95,7 +88,6 @@ public class DailyQuote_DAO {
   }
 
 
-//modify
   public static DailyQuote parseJSON(JSONObject obj) {
 
     if (obj == null) { return null; }
@@ -140,7 +132,7 @@ public class DailyQuote_DAO {
       }
     }
     content = rows;
-    //每一次获取的DailyQuote,都添加到了ArrayList
+    //each DailyQuote when we get , added to the ArrayList
     return result;
   }
 

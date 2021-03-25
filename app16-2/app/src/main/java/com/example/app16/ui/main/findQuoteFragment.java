@@ -30,22 +30,18 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
     View root;
     Context myContext;
     findQuoteBean findquotebean;
-    //modify
-    //开始日期button
+    //startdate  button
     Button btnStart;
-    //开始日期的输出条
+    //the ouput of startDate
     TextView et1;
-    //结束日期button
+    //Enddate button
     Button btnEnd;
-    //结束日期的输出条
+    //the ouput of enddate
     TextView et2;
 
-    //date editText
-//    EditText findQuotedateTextFieldStart;
-//    EditText findQuotedateTextFieldEnd;
-    //开始时间字符串
+    //startdate
     String findQuotedateDataStart = "";
-    //结束时间字符串
+    //enddate
     String findQuotedateDataEnd = "";
     TextView findQuoteResult;
     Button findQuoteOkButton;
@@ -54,7 +50,7 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
 
  public findQuoteFragment() {}
 
- //modify---去掉饿了static
+
   public findQuoteFragment newInstance(Context c) {
 
       findQuoteFragment fragment = new findQuoteFragment();
@@ -70,36 +66,33 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
   @Override
   public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-     //确定root
      root = inflater.inflate(R.layout.findquote_layout, container, false);
      Bundle data = getArguments();
-     //获取客户所输入的各个信息
 
       //modify
 //     findQuotedateTextField = (EditText) root.findViewById(R.id.findQuotedateField);
      findQuoteResult = (TextView) root.findViewById(R.id.findQuoteResult);
-     //实例化对象
      findquotebean = new findQuoteBean(myContext);
      //Button findquote
      findQuoteOkButton = root.findViewById(R.id.findQuoteOK);
-     //设置监听
+     //set listener
      findQuoteOkButton.setOnClickListener(this);
      //button cancel
      findQuotecancelButton = root.findViewById(R.id.findQuoteCancel);
-     //设置监听
+      //set listener
      findQuotecancelButton.setOnClickListener(this);
 
-     //modify---开始时间和输出条
+     //modify---Start Date and data input
       btnStart = (Button) root.findViewById(R.id.dateBtnStart);
       et1 = (TextView) root.findViewById(R.id.et1);
 
       btnStart.setOnClickListener(new View.OnClickListener() {
-          //打开日历
+          //open Calendar
           Calendar c = Calendar.getInstance();
 
           @Override
           public void onClick(View v) {
-              // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+              // show the date, choose the true
               new DoubleDatePickerDialogStart(myContext, 0, new DoubleDatePickerDialogStart.OnDateSetListenerStart() {
 
                   @Override
@@ -113,17 +106,17 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
           }
       });
 
-      //结束时间和输出条
+      //End date
       btnEnd = (Button) root.findViewById(R.id.dateBtnEnd);
       et2 = (TextView) root.findViewById(R.id.et2);
 
       btnEnd.setOnClickListener(new View.OnClickListener() {
-          //打开日历
+          //open Calendar
           Calendar c = Calendar.getInstance();
 
           @Override
           public void onClick(View v) {
-              // 最后一个false表示不显示日期，如果要显示日期，最后参数可以是true或者不用输入
+              // show the date, choose the true
               new DoubleDatePickerDialogEnd(myContext, 0, new DoubleDatePickerDialogEnd.OnDateSetListenerEnd() {
 
                   @Override
@@ -144,7 +137,7 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
 
 
 
-//获取客户点击的按钮----findquote还是cancel
+//get the button from clients ---cancel or findquote
   public void onClick(View _v)
   { InputMethodManager _imm = (InputMethodManager) myContext.getSystemService(android.content.Context.INPUT_METHOD_SERVICE);
     try { _imm.hideSoftInputFromWindow(_v.getWindowToken(), 0); } catch (Exception _e) { }
@@ -164,36 +157,34 @@ public class findQuoteFragment extends Fragment implements OnClickListener {
 //          DailyQuote.DailyQuote_allInstances.clear();
 //          DailyQuote.DailyQuote_index.clear();
 //      }
-      //获取开始时间--modify
+      //get the start date
     findQuotedateDataStart = et1.getText() + "";
 
-    //获取结束时间--modify
+    //get the end date
     findQuotedateDataEnd = et2.getText() + "";
 
-    //设置时间
+    //set startdate
     findquotebean.setStartdate(findQuotedateDataStart);
-      //设置时间
+      //set enddate
      findquotebean.setEnddate(findQuotedateDataEnd);
 
-    //检查时间是否有效 + 间隔相差大于两年的date无效--没有设计
     if (findquotebean.isfindQuoteerror())
     { Log.w(getClass().getName(), findquotebean.errors());
       Toast.makeText(myContext, "Errors: " + findquotebean.errors(), Toast.LENGTH_LONG).show();
     }
     else
-    {   //Result显示在app上
-        //发送信息给网上进行获取数据操作
+    {   //get the result
         findQuoteResult.setText(findquotebean.findQuote() + ""); }
   }
 
 
 
-  //重置时间
+  //reset data
   public void findQuoteCancel(View _v)
   {
-      //重置data
-      findquotebean.resetData();
-      //开始时间
+      //reset data
+      findquotebean.resetDate();
+      //start date
       et1.setText("");
       et2.setText("");
       findQuoteResult.setText("");

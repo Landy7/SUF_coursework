@@ -95,13 +95,12 @@ public class FileAccessor {
         writeTxtToFile(content, filePath, fileName);
     }
 
-    // 将字符串写入到文本文件中
+    // the content write into File
     public void writeTxtToFile(ArrayList<String> strcontent, String filePath, String fileName) {
-        //生成文件夹之后，再生成文件，不然会出错
+        //create a directory and then create a file
         makeFilePath(filePath, fileName);
 
         String strFilePath = filePath+fileName;
-        // 每次写入时，都换行写
 //            String strContent = strcontent + "\r\n";
             try {
                 File file = new File(strFilePath);
@@ -126,10 +125,9 @@ public class FileAccessor {
             }
     }
 
-    // 生成文件
+    // create the file
     public File makeFilePath(String filePath, String fileName) {
         File file = null;
-        //生成文件夹
         makeRootDirectory(filePath);
         try {
             file = new File(filePath + fileName);
@@ -142,7 +140,7 @@ public class FileAccessor {
         return file;
     }
 
-    // 生成文件夹
+    // create directory
     public static void makeRootDirectory(String filePath) {
         File file = null;
         try {

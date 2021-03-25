@@ -122,14 +122,14 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
         LayoutInflater inflater = (LayoutInflater) themeContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.date_start, null);
         setView(view);
-        //获取开始和结束时间
+        //get start and end date
         mDatePicker_start = (DatePicker) view.findViewById(R.id.datePickerStart);
 //        mDatePicker_end = (DatePicker) view.findViewById(R.id.datePickerEnd);
         mDatePicker_start.init(year, monthOfYear, dayOfMonth, this);
 //        mDatePicker_end.init(year, monthOfYear, dayOfMonth, this);
         // updateTitle(year, monthOfYear, dayOfMonth);
 
-        // 如果要隐藏当前日期，则使用下面方法。
+        // hide the start
         if (!isDayVisible) {
             hidDay(mDatePicker_start);
 //            hidDay(mDatePicker_end);
@@ -137,7 +137,7 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
     }
 
     /**
-     * 隐藏DatePicker中的日期显示
+     * hide DatePicker
      *
      * @param mDatePicker
      */
@@ -163,7 +163,6 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
     public void onClick(DialogInterface dialog, int which) {
         // Log.d(this.getClass().getSimpleName(), String.format("which:%d",
         // which));
-        // 如果是“取 消”按钮，则返回，如果是“确 定”按钮，则往下执行
         if (which == BUTTON_POSITIVE)
             tryNotifyDateSet();
     }
@@ -177,7 +176,7 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
     }
 
     /**
-     * 获得开始日期的DatePicker
+     *
      *
      * @return The calendar view.
      */
@@ -186,7 +185,7 @@ public class DoubleDatePickerDialogStart extends AlertDialog implements OnClickL
     }
 
     /**
-     * 获得结束日期的DatePicker
+     *
      *
      * @return The calendar view.
      */

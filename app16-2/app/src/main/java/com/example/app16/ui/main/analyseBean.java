@@ -11,7 +11,7 @@ public class analyseBean
 
   private List errors = new ArrayList();
 
-  //获取context
+  //get context
   public analyseBean(Context _c) { ModelFacade.getInstance(_c); }
 
 
@@ -22,15 +22,7 @@ public class analyseBean
 
   public String errors() { return errors.toString(); }
 
-  //图像分析---modify---Arraylist
-//  public GraphDisplay analyse()
-//  { //获取modelFacade的图像
-//    return model.analyse(); }
 
-//  //图像分析---modify---Arraylist
-//  public GraphDisplay analyse2()
-//  { //获取modelFacade的图像
-//    return model.analyse2(); }
 
 }
 

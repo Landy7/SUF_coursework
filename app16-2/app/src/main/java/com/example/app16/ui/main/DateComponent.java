@@ -10,14 +10,14 @@ import java.text.SimpleDateFormat;
 
 public class DateComponent
 {
-    //获取时间---modify
+    //get time---modify
     public long getEpochSeconds(String date)
   {
       DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 
       try
       { Date d = df.parse(date);
-      //应该是换算成秒数
+      //change into seconds
       long time = d.getTime()/1000;
 	  return time;
 	  }

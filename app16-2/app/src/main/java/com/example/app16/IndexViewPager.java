@@ -18,8 +18,8 @@ public class IndexViewPager extends ViewPager {
     }
 
     /**
-     * 设置其是否能滑动换页
-     * @param isCanScroll false 不能换页， true 可以滑动换页
+     * set whether could scroll the page or not
+     * @param isCanScroll false cannot scroll， true can scroll
      */
     public void setScanScroll(boolean isCanScroll) {
         this.isCanScroll = isCanScroll;

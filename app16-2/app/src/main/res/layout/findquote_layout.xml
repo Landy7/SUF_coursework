@@ -5,14 +5,13 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
 tools:context=".ui.main.findQuoteFragment" >
-<!--tools context?是什么？-->
-<!--  表格布局-->
+<!--  table layout-->
   <TableLayout
   android:layout_width="fill_parent"
   android:layout_height="fill_parent"
   android:stretchColumns="1" >
 
-<!--这是一行 modify 去掉输入日期改成按钮和输入条-->
+<!--start date and the text-->
   <TableRow>
 <!--  <TextView-->
 <!--    android:id="@+id/findQuotedateLabel"-->
@@ -37,7 +36,7 @@ tools:context=".ui.main.findQuoteFragment" >
         android:editable="false" />
 
   </TableRow>
-<!--    modify 改成了两行开始日期和结束日期-->
+<!--  end date and the text-->
     <TableRow>
       <Button
           android:id="@+id/dateBtnEnd"
@@ -52,7 +51,7 @@ tools:context=".ui.main.findQuoteFragment" >
           android:editable="false" />
     </TableRow>
 
-<!-- 这是一行-->
+<!-- this is a row-->
   <TableRow>
   <Button
   android:id="@+id/findQuoteOK"
@@ -74,7 +73,7 @@ tools:context=".ui.main.findQuoteFragment" >
   />
   </TableRow>
 
-<!--这是一行-->
+<!--it is a row-->
   <TableRow>
   <TextView
     android:id="@+id/findQuoteResultLabel"

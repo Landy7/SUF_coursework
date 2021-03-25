@@ -15,13 +15,13 @@ import android.util.Log;
 
 public class InternetAccessor extends AsyncTask<String, Void, String>
 {  private InternetCallback delegate = null;
-//modify
+
    private InternetAccessor instance = null;
 
    public void setDelegate(InternetCallback c)
    { delegate = c; }
 
-   //modify
+
    public static InternetAccessor getInstance()
    {
        InternetAccessor internetAccessor = new InternetAccessor();
@@ -39,14 +39,13 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
      try { myData = fetchUrl(url); }
      catch (Exception _e)
      { delegate.internetAccessCompleted(null);
-         System.out.println("hello_randy1");
        return null;
      }
-     //获取到数据
+     //get the data
      return myData;
    }
 
-   //应该是访问改网址获得这段时间的数据
+   //visit the website and download the data in this period
    private String fetchUrl(String url)
    { String urlContent = "";
      StringBuilder myStrBuff = new StringBuilder();
@@ -67,25 +66,23 @@ public class InternetAccessor extends AsyncTask<String, Void, String>
           }
       } catch (IOException e) {
           delegate.internetAccessCompleted(null);
-         System.out.println("hello_randy2");
           return null;
       }
 
       return myStrBuff.toString();
   }
 
-  //最后结果
+  //the result
   @Override
   protected void onPostExecute(String result) {
       delegate.internetAccessCompleted(result);
-      System.out.println("hello_randy3");
   }
 
   @Override
   protected void onProgressUpdate(Void... values) {}
  }
 
- //modify 接口---异步处理成功后进入makeFromCSV导入数据
+ //interface
 interface InternetCallback
 { public ArrayList<DailyQuote> internetAccessCompleted(String response); }
 

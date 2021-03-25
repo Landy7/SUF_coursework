@@ -14,7 +14,7 @@ public class findQuoteBean
   private String Enddate = "";
   private List errors = new ArrayList();
 
-  //modify---获取页面的数据
+  //get the data
   public findQuoteBean(Context _c) {
     model = ModelFacade.getInstance(_c);
   }
@@ -25,7 +25,7 @@ public class findQuoteBean
   public void setEnddate(String datex)
   { Enddate = datex; }
 
-  public void resetData()
+  public void resetDate()
   { Startdate = "";
     Enddate = "";
     }

@@ -18,22 +18,21 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
 
   public SectionsPagerAdapter(Context context, FragmentManager fm)
   { super(fm);
-  //数据内容值传给mContext
+  //data content to mContext
     mContext = context;
   }
 
   @Override
   public Fragment getItem(int position)
   { // instantiate a fragment for the page.
-      //0表示findQuote
+      //0 represents findQuote
       analyseFragment af_all = new analyseFragment();
     if (position == 0)
     {   //findquote
-        //modify
         findQuoteFragment fqf = new findQuoteFragment();
         return fqf.newInstance(mContext); }
 
-    //1表示Fragment
+    //1 represents Fragment
     else if (position == 1)
     {   //analyse
         analyseFragment af = new analyseFragment();

@@ -13,16 +13,14 @@ import java.util.Collections;
 class DailyQuote {
 
 
-  //不应该为静态---modify
+  //not static ---modify
   public Map<String,DailyQuote> DailyQuote_index = new HashMap<String,DailyQuote>();
-  //modify 不要这个，而是在dailyQuote_DAO创建ArrayList
 //  public ArrayList<DailyQuote> DailyQuote_allInstances = new ArrayList<DailyQuote>();
 
 //  Map<String,DailyQuote> DailyQuote_index = new HashMap<String,DailyQuote>();
 //  ArrayList<DailyQuote> DailyQuote_allInstances = new ArrayList<DailyQuote>();
 
-  //构造函数,添加DailyQuote给数组列表---modify 不要每次实例化都把数据传入all_instance
-//  DailyQuote() { DailyQuote_allInstances.add(this); }
+
     DailyQuote(){};
 
   static DailyQuote createDailyQuote() {
@@ -31,25 +29,11 @@ class DailyQuote {
     return result;
   }
 
-  //把时间和对应的dailyQuote用key-value存储
+
   String date = ""; /* primary */
 
 
-  //写入DailyQuote(date and DailyQuote_index)
-//  static DailyQuote createByPKDailyQuote(String datex) {
-//
-//    //实例化一个dailyQuote
-//    DailyQuote result = new DailyQuote();
-//    //静态变量 类名.变量名
-//    //DailyQuote_index存储对应的date和result
-////    DailyQuote.DailyQuote_index.put(datex,result);
-//
-//    result.DailyQuote_index.put(datex,result);
-//    result.date = datex;
-//
-//    return result;
-//
-//  }
+
 
 //attributes in DailyQuote
   double open = 0;
