@@ -8,7 +8,7 @@ public class FormatNumber {
 	}
 
 	public static double round(double value) {
-		return FormatNumber.round(value, 2);
+		return FormatNumber.round(value, 5);
 	}
 
 	public static double round(double value, int digits) {

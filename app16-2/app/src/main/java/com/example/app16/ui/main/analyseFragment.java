@@ -249,7 +249,7 @@ public class analyseFragment extends Fragment implements OnClickListener {
 //            results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
 //>>>>>>> Stashed changes
         } else if (selected == "MACDAVG") {
-            results = new MACDAVG().calculate(priceArray,8,11, 25).getMACDAVG();
+            results = new MACDAVG().calculate(priceArray,9,11, 25).getMACDAVG();
         }
 
         for (int i = 0; i < postQuotes.size(); i++) {
