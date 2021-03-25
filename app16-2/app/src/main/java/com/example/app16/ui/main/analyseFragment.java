@@ -260,7 +260,6 @@ public class analyseFragment extends Fragment implements OnClickListener {
         LineDataSet lineDataSet = new LineDataSet(entries, "share");
 //<<<<<<< Updated upstream
         lineDataSet.setColor(Color.BLUE);
-//            //圆点颜色
 //=======
 //
 //
@@ -273,7 +272,7 @@ public class analyseFragment extends Fragment implements OnClickListener {
             LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
 //<<<<<<< Updated upstream
             lineDataSet_1.setColor(Color.YELLOW);
-//            //圆点颜色
+//            
             lineDataSet_1.setCircleColor(Color.YELLOW);
             sets.add(lineDataSet_1);
             lineDataSet_1.setCircleColor(Color.BLACK);
