@@ -272,7 +272,7 @@ public class analyseFragment extends Fragment implements OnClickListener {
             LineDataSet lineDataSet_1 = new LineDataSet(entries_1, selected);
 //<<<<<<< Updated upstream
             lineDataSet_1.setColor(Color.YELLOW);
-//            
+//
             lineDataSet_1.setCircleColor(Color.YELLOW);
             sets.add(lineDataSet_1);
             lineDataSet_1.setCircleColor(Color.BLACK);
