@@ -83,7 +83,6 @@ interface Evaluation<S,T> {
       return result; 
     } 
 
-    //？？？
     public static <S,T> ArrayList<T> collectSequence(ArrayList<S> _s, Evaluation<S,T> _f)
     { ArrayList<T> result = new ArrayList<T>(); 
       for (int i = 0; i < _s.size(); i++) 

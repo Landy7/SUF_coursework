@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 class MyValueFormatter implements IValueFormatter {
 
-    private DecimalFormat format = new DecimalFormat("0.000000");
+    private DecimalFormat format = new DecimalFormat("0.00000");
     // ValueFormatter
     @Override
     public String getFormattedValue(float value, Entry entry, int dataSetIndex,

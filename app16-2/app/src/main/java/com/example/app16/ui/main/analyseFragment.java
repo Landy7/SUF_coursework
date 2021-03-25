@@ -239,17 +239,17 @@ public class analyseFragment extends Fragment implements OnClickListener {
 
         // get the different formula
         if (selected == "SMA") {
-            results = new SMA().calculate(priceArray, 25).getSMA();
+            results = new SMA().calculate(priceArray, 26).getSMA();
         } else if (selected == "EMA") {
-            results = new EMA().calculate(priceArray, 25).getEMA();
+            results = new EMA().calculate(priceArray, 26).getEMA();
         } else if (selected == "MACD") {
 //<<<<<<< Updated upstream
-            results = new MACD().calculate(priceArray, 11, 25).getMACD();
+            results = new MACD().calculate(priceArray, 12, 26).getMACD();
 //=======
 //            results = new MovingAverageConvergenceDivergence().calculate(priceArray, 11, 25).getMACD();
 //>>>>>>> Stashed changes
         } else if (selected == "MACDAVG") {
-            results = new MACDAVG().calculate(priceArray,9,11, 25).getMACDAVG();
+            results = new MACDAVG().calculate(priceArray,9,12, 26).getMACDAVG();
         }
 
         for (int i = 0; i < postQuotes.size(); i++) {

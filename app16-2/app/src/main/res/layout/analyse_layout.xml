@@ -54,7 +54,6 @@ tools:context=".ui.main.analyseFragment" >
   />
   </TableRow>
 
-<!--  图像展示 折线图-->
 </TableLayout>
 <!--    <HorizontalScrollView-->
 <!--        android:id="@+id/sc"-->
