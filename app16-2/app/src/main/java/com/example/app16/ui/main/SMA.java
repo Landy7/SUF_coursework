@@ -11,7 +11,7 @@ public class SMA {
 		this.smaResult = new double[prices.length];
 
 		for (int i = 0; i <= prices.length - period; i++) {
-			this.smaResult[(period + i - 1)] = NumberFormatter
+			this.smaResult[(period + i - 1)] = FormatNumber
 					.round((Arrays.stream(Arrays.copyOfRange(prices, i, (i + period))).sum()) / period);
 		}
 

@@ -15,7 +15,7 @@ public class MACD {
 		longEMA.calculate(prices, longPeriod);
 
 		for (int i = longPeriod - 1; i < prices.length; i++) {
-			this.macdResult[i] = NumberFormatter.round(shortEMA.getEMA()[i] - longEMA.getEMA()[i]);
+			this.macdResult[i] = FormatNumber.round(shortEMA.getEMA()[i] - longEMA.getEMA()[i]);
 		}
 
 		return this;

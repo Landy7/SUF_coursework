@@ -27,7 +27,7 @@ public class EMA {
 						+ this.emaResult[i - 1];
 			}
 
-			this.emaResult[i] = NumberFormatter.round(this.emaResult[i]);
+			this.emaResult[i] = FormatNumber.round(this.emaResult[i]);
 		}
 
 		return this;

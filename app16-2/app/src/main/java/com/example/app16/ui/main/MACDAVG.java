@@ -17,7 +17,7 @@ public class MACDAVG
 
 
         for (int i = period - 1; i < prices.length; i++) {
-            this.macdavg[i] = NumberFormatter.round(ema.getEMA()[i]);
+            this.macdavg[i] = FormatNumber.round(ema.getEMA()[i]);
         }
 
         return this;
